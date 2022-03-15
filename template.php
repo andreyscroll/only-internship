@@ -11,7 +11,9 @@ if ($arResult["isFormErrors"] == "Y"){
 <?if ($arResult["isFormNote"] != "Y"):?>
 
 	<?if ($arResult["isFormImage"] == "Y"):?>
-		<a href="<?=$arResult["FORM_IMAGE"]["URL"]?>" target="_blank" alt="<?=GetMessage("FORM_ENLARGE")?>"><img src="<?=$arResult["FORM_IMAGE"]["URL"]?>" <?if($arResult["FORM_IMAGE"]["WIDTH"] > 300):?>width="300"<?elseif($arResult["FORM_IMAGE"]["HEIGHT"] > 200):?>height="200"<?else:?><?=$arResult["FORM_IMAGE"]["ATTR"]?><?endif;?> hspace="3" vscape="3" border="0" /></a>
+		<a href="<?=$arResult["FORM_IMAGE"]["URL"]?>" target="_blank" alt="<?=GetMessage("FORM_ENLARGE")?>">
+			<img src="<?=$arResult["FORM_IMAGE"]["URL"]?>" <?if($arResult["FORM_IMAGE"]["WIDTH"] > 300):?>width="300"<?elseif($arResult["FORM_IMAGE"]["HEIGHT"] > 200):?>height="200"<?else:?><?=$arResult["FORM_IMAGE"]["ATTR"]?><?endif;?> hspace="3" vscape="3" border="0" />
+		</a>
 		<?//=$arResult["FORM_IMAGE"]["HTML_CODE"]?>
 	<?endif; //endif ?>
 
@@ -24,8 +26,8 @@ if ($arResult["isFormErrors"] == "Y"){
 	        </div>
 	        <div class="contact-form__head-text">
 	        	<?if($arResult["isFormDescription"]):?>
-					<?=$arResult["FORM_DESCRIPTION"]?>
-				<?endif;?>
+				<?=$arResult["FORM_DESCRIPTION"]?>
+			<?endif;?>
 	        </div>
 	    </div>
 
@@ -60,17 +62,17 @@ if ($arResult["isFormErrors"] == "Y"){
 	        	<?endforeach;?>
 
 	        <?if($arResult["isUseCaptcha"] == "Y"):?>
-				<div>
-					<b><?=GetMessage("FORM_CAPTCHA_TABLE_TITLE")?></b>
-				</div>
-				<div>
-					<input type="hidden" name="captcha_sid" value="<?=htmlspecialcharsbx($arResult["CAPTCHACode"]);?>" /><img src="/bitrix/tools/captcha.php?captcha_sid=<?=htmlspecialcharsbx($arResult["CAPTCHACode"]);?>" width="180" height="40" /></td>
-				</div>
-				<div>
-					<?=GetMessage("FORM_CAPTCHA_FIELD_TITLE")?><?=$arResult["REQUIRED_SIGN"];?>
-					<input type="text" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" />
-				</div>
-			<?endif;?>
+			<div>
+				<b><?=GetMessage("FORM_CAPTCHA_TABLE_TITLE")?></b>
+			</div>
+			<div>
+				<input type="hidden" name="captcha_sid" value="<?=htmlspecialcharsbx($arResult["CAPTCHACode"]);?>" /><img src="/bitrix/tools/captcha.php?captcha_sid=<?=htmlspecialcharsbx($arResult["CAPTCHACode"]);?>" width="180" height="40" /></td>
+			</div>
+			<div>
+				<?=GetMessage("FORM_CAPTCHA_FIELD_TITLE")?><?=$arResult["REQUIRED_SIGN"];?>
+				<input type="text" name="captcha_word" size="30" maxlength="50" value="" class="inputtext" />
+			</div>
+		<?endif;?>
 
 	        <div class="contact-form__bottom">
 	            <div class="contact-form__bottom-policy">Нажимая &laquo;Отправить&raquo;, Вы&nbsp;подтверждаете, что
