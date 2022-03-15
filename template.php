@@ -80,11 +80,9 @@ if ($arResult["isFormErrors"] == "Y"){
 	                данных&raquo;.
 	            </div>
 
-	            <button class="form-button contact-form__bottom-button" data-success="Отправлено" data-error="Ошибка отправки">
-	                <div class="form-button__title">
-	                	<?=htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? GetMessage("FORM_ADD") : $arResult["arForm"]["BUTTON"]);?>
-	                </div>
-	            </button>
+	            <input <?=(intval($arResult["F_RIGHT"]) < 10 ? "disabled=\"disabled\"" : "");?> type="submit" name="web_form_submit" 
+			   value="<?=htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? GetMessage("FORM_ADD") : $arResult["arForm"]["BUTTON"]);?>" 
+			   class="form-button contact-form__bottom-button" />
 	        </div>
 
 	    <?=$arResult["FORM_FOOTER"]?>
