@@ -13,14 +13,14 @@ if ($arResult["isFormErrors"] == "Y"){
 	<div class="contact-form">
 	    <div class="contact-form__head">
 	        <div class="contact-form__head-title">
-		        <?if($arResult["isFormTitle"]):?>
-		        	<?=$arResult["FORM_TITLE"]?>
-		        <?endif;?>
+			<?if($arResult["isFormTitle"]):?>
+				<?=$arResult["FORM_TITLE"]?>
+			<?endif;?>
 	        </div>
 	        <div class="contact-form__head-text">
 	        	<?if($arResult["isFormDescription"]):?>
-					<?=$arResult["FORM_DESCRIPTION"]?>
-				<?endif;?>
+				<?=$arResult["FORM_DESCRIPTION"]?>
+			<?endif;?>
 	        </div>
 	    </div>
 
@@ -55,16 +55,16 @@ if ($arResult["isFormErrors"] == "Y"){
 	        	<?endforeach;?>
 
 	        <div class="contact-form__bottom">
-	            <div class="contact-form__bottom-policy">Нажимая &laquo;Отправить&raquo;, Вы&nbsp;подтверждаете, что
-	                ознакомлены, полностью согласны и&nbsp;принимаете условия &laquo;Согласия на&nbsp;обработку персональных
-	                данных&raquo;.
-	            </div>
+			<div class="contact-form__bottom-policy">
+				Нажимая &laquo;Отправить&raquo;, Вы&nbsp;подтверждаете, что ознакомлены, полностью согласны и&nbsp;принимаете условия &laquo;
+				Согласия на&nbsp;обработку персональных данных&raquo;.
+			</div>
 
-	            <button class="form-button contact-form__bottom-button" data-success="Отправлено" data-error="Ошибка отправки">
-	                <div class="form-button__title">
-	                	<?=htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? GetMessage("FORM_ADD") : $arResult["arForm"]["BUTTON"]);?>
-	                </div>
-	            </button>
+			<button class="form-button contact-form__bottom-button" data-success="Отправлено" data-error="Ошибка отправки">
+				<div class="form-button__title">
+				<?=htmlspecialcharsbx(trim($arResult["arForm"]["BUTTON"]) == '' ? GetMessage("FORM_ADD") : $arResult["arForm"]["BUTTON"]);?>
+				</div>
+			</button>
 	        </div>
 
 	    <?=$arResult["FORM_FOOTER"]?>
