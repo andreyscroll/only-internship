@@ -98,7 +98,7 @@ class VacanciesCsvImporter
 				} else {
 				    $arSalary = explode(' ', $PROP['SALARY_VALUE']);
 				    if ($arSalary[0] == 'от' || $arSalary[0] == 'до') {
-					$PROP['SALARY_TYPE'] = $this->arProps['SALARY_TYPE'][$arSalary[0]];
+					$PROP['SALARY_TYPE'] = $this->arProps['SALARY_TYPE'][mb_strtoupper($arSalary[0])];
 					array_splice($arSalary, 0, 1);
 					$PROP['SALARY_VALUE'] = implode(' ', $arSalary);
 				    } else {
@@ -139,19 +139,7 @@ class VacanciesCsvImporter
 	            {
 	                foreach ($this->arProps[$key] as $propKey => $propVal)
 	                {
-	                    // if ($key == 'OFFICE') {
-	                    //     $value = strtolower($value);
-	                    //     if ($value == 'центральный офис') {
-	                    //         $value .= 'свеза ' . $data[2];
-	                    //     } elseif ($value == 'лесозаготовка') {
-	                    //         $value = 'свеза ресурс ' . $value;
-	                    //     } elseif ($value == 'свеза тюмень') {
-	                    //         $value = 'свеза тюмени';
-	                    //     }
-	                    //     $arSimilar[similar_text($value, $propKey)] = $propVal;
-	                    // }
-
-	                    if (stripos($propKey, $value) !== false) {
+	                        if (stripos($propKey, $value) !== false) {
 	                        $value = $propVal;
 	                        break;
 	                    }
@@ -161,16 +149,10 @@ class VacanciesCsvImporter
 	                    }
 	                }
 
-	                // if ($key == 'OFFICE' && !is_numeric($value)) {
-	                //     ksort($arSimilar);
-	                //     $value = array_pop($arSimilar);
-	                // }
 	            }
 	        }
 	        $this->arImport[] = $this->data[$i];
 		}
-
-		//$this->arImport = $this->data;
 			
 	}
 	
@@ -218,15 +200,15 @@ class VacanciesCsvImporter
 	private function formatValue($value)
 	{
 		$value = trim($value);
-    $value = str_replace('\n', '', $value);
-    if (stripos($value, '•') !== false) {
-        $value = explode('•', $value);
-        array_splice($value, 0, 1);
-        foreach ($value as &$str){
-            $str = trim($str);
-        }
-    }
-    return $value;
+	    $value = str_replace('\n', '', $value);
+	    if (stripos($value, '•') !== false) {
+		$value = explode('•', $value);
+		array_splice($value, 0, 1);
+		foreach ($value as &$str){
+		    $str = trim($str);
+		}
+	    }
+	    return $value;
 	}
 
 	/**
@@ -242,19 +224,19 @@ class VacanciesCsvImporter
 			foreach($this->arImport as $item)
 			{
 				$arLoadProductArray = [
-		            "MODIFIED_BY" => $USER->GetID(),
-		            "IBLOCK_SECTION_ID" => false,
-		            "IBLOCK_ID" => $this->iBlockId,
-		            "PROPERTY_VALUES" => $item['PROP'],
-		            "NAME" => $item['NAME'],
-		            "ACTIVE" => empty($item['PROP']['SCHEDULE']) ? 'N' : 'Y',
-		        ];
+				    "MODIFIED_BY" => $USER->GetID(),
+				    "IBLOCK_SECTION_ID" => false,
+				    "IBLOCK_ID" => $this->iBlockId,
+				    "PROPERTY_VALUES" => $item['PROP'],
+				    "NAME" => $item['NAME'],
+				    "ACTIVE" => empty($item['PROP']['SCHEDULE']) ? 'N' : 'Y',
+				];
 
-		        if ($PRODUCT_ID = $this->el->Add($arLoadProductArray)) {
-		            echo "Добавлен элемент с ID : " . $PRODUCT_ID . "<br>";
-		        } else {
-		            echo "Error: " . $this->el->LAST_ERROR . '<br>';
-		        }
+				if ($PRODUCT_ID = $this->el->Add($arLoadProductArray)) {
+				    echo "Добавлен элемент с ID : " . $PRODUCT_ID . "<br>";
+				} else {
+				    echo "Error: " . $this->el->LAST_ERROR . '<br>';
+				}
 			}
 		}
 			
